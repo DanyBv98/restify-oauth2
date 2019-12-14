@@ -63,7 +63,7 @@ server.get(RESOURCES.PUBLIC, function (req, res) {
 
 server.get(RESOURCES.SECRET, function (req, res) {
     if (!req.clientId) {
-        return res.sendUnauthenticated();
+		return res.send(new errors.UnauthorizedError("No allowed."));
     }
 
     var response = {

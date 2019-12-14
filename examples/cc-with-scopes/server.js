@@ -68,7 +68,7 @@ server.get(RESOURCES.PUBLIC, function (req, res) {
 
 server.get(RESOURCES.SECRET, function (req, res) {
     if (!req.clientId) {
-        return res.sendUnauthenticated();
+		return res.send(new errors.UnauthorizedError("No allowed."));
     }
 
     var response = {
@@ -84,12 +84,12 @@ server.get(RESOURCES.SECRET, function (req, res) {
 });
 
 server.get(RESOURCES.SCOPED, function (req, res) {
-    if (!req.clientId) {
-        return res.sendUnauthenticated();
-    }
+	if (!req.clientId) {
+		return res.send(new errors.UnauthorizedError("No allowed."));
+	}
 
     if (req.scopesGranted.indexOf("two") === -1) {
-        return res.sendUnauthorized();
+		return res.send(new errors.UnauthorizedError("No allowed."));
     }
 
     var response = {

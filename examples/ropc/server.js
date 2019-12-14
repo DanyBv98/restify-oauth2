@@ -62,10 +62,9 @@ server.get(RESOURCES.PUBLIC, function (req, res) {
 });
 
 server.get(RESOURCES.SECRET, function (req, res) {
-    if (!req.username) {
-        return res.sendUnauthenticated();
-    }
-
+	if (!req.username) {
+		return res.send(new errors.UnauthorizedError("No allowed."));
+	}
     var response = {
         "users with a token": "have access to this secret data",
         _links: {
